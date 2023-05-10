@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "CalculateVoronoiStatistics"
+version = "2023.0"
+description = "A Python script modifier for OVITO to generate a histogram of the most frequent Voronoi motifs."
+authors = [{name = "Constanze Kalcher", email = "kalcher@ovito.org"}]
+maintainers = [{name = "Constanze Kalcher", email = "kalcher@ovito.org"}]
+license = {text = "MIT License"}
+readme = "README.md"
+requires-python = ">=3.7"
+
+[project.urls]
+repository = "https://github.com/ckalcher/CalculateVoronoiStatistics.git"
+
+[project.entry-points.'OVITO.Modifier']
+CalculateVoronoiStatistics = "CalculateVoronoiStatistics:CalculateVoronoiStatistics"
+
+[tool.setuptools.packages.find]
+where = ["src"]
