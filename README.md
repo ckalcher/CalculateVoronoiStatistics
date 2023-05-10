@@ -1,1 +1,1 @@
-# CaculateVoronoiStatistics
+# CalculateVoronoiStatistics
