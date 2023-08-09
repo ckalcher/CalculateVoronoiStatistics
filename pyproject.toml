@@ -3,26 +3,25 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "[[ModifierName]]"
-version = "[[Version number]]"
-description = "[[Short description]]"
+name = "CalculateVoronoiStatistics"
+version = "2023.0"
+description = "Generates a histogram of the N most frequent Voronoi motifs."
 keywords = ["ovito", "python-modifier"]
-authors = [{name = "[[Author 1 name]]", email = "[[Author 1 email]]"}, {name = "[[Author 2 name]]", email = "[[Author 2 email]]"}]
-maintainers = [{name = "[[Maintainer 1 name]]", email = "[[Maintainer 1 email]]"}, {name = "[[Maintainer 2 name]]", email = "[[Maintainer 2 email]]"}]
-license = {text = "[[License]]"}
+authors = [{name = "Constanze Kalcher", email = "kalcher@ovito.org"}]
+maintainers = [{name = "OVITO GmbH", email = "support@ovito.org"}]
+license = {text = "MIT License"}
 readme = "README.md"
-requires-python = "[[>=3.7]]"
+requires-python = ">=3.7"
 dependencies = [
-    "ovito >= [[VersionNumber]]", # OVITO must be >=3.9!
-    # "[[dependency1]]",
-    # "[[dependency2 == Version]]",
+    "ovito >= 3.9.1", 
+    "numpy >= 1.22",
 ]
 
 [project.urls]
-repository = "[[Repository Link]]"
+repository = "https://github.com/ckalcher/CalculateVoronoiStatistics.git"
 
 [project.entry-points.'OVITO.Modifier']
-"[[Human readable modifier name]]" = "[[ModifierName]]:[[ModifierName]]"
+"Generate Voronoi Statistics Histogram" = "CalculateVoronoiStatistics:CalculateVoronoiStatistics"
 
 [tool.setuptools.packages.find]
 where = ["src"]
