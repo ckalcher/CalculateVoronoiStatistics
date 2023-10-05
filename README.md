@@ -15,6 +15,8 @@ You have some control over the appearance of the histogram labels, but note that
 - `n_start` / "Min Voronoi order": The start Voronoi index used in x-axis labels `<n_start,...,n_end>` (only if option `Truncate x-axis labels` is selected.)
 - `n_end` / "Max Voronoi order": The end Voronoi index used in x-axis labels `<n_start,...,n_end>`
  (only if option `Truncate x-axis labels` is selected.)
+- `use_selected` / "Use only selected atoms": Use only the Voronoi signatures of selected atoms to generate the histogram.
+
 
 ## Example
 ![Screenshot of OVITO Pro Desktop application](./Examples/CalculateVoronoiStatisticsModifier.png)

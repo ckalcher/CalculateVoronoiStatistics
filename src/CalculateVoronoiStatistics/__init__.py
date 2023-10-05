@@ -16,6 +16,7 @@ class CalculateVoronoiStatistics(ModifierInterface):
     x_axis_labels = Bool(True, label="Truncate x-axis labels")
     n_start = Int(3, label = "Min Voronoi order")
     n_end = Int(6, label = "Max Voronoi order")
+    use_selected = Bool(default_value=False, label= "Use only selected atoms")
 
     def voro_format(self, voro_index, i_start, i_end):
         s = "⟨"
@@ -52,9 +53,15 @@ class CalculateVoronoiStatistics(ModifierInterface):
                 print(f"Max face order is {data.attributes['Voronoi.max_face_order']}. \n"  
                     + f"Using {data.attributes['Voronoi.max_face_order']} as n_max in labels instead of {self.n_end}.")
                 self.n_end = data.attributes["Voronoi.max_face_order"]
-
-        voro_indices = data.particles['Voronoi Index']
         
+        if self.use_selected:
+            if "Selection" not in data.particles:
+                raise RuntimeError("The operation requires an input particles selection.")
+            voro_indices = data.particles['Voronoi Index'][data.particles.selection == 1]
+        else:
+            voro_indices = data.particles['Voronoi Index']
+
+
         # Compute frequency histogram.
         unique_indices, counts = self.row_histogram(voro_indices)
         print(f"There are {len(unique_indices)} unique motifs in this dataset.")
@@ -62,7 +69,7 @@ class CalculateVoronoiStatistics(ModifierInterface):
         if self.max_indices > len(unique_indices):
             self.max_indices = len(unique_indices)
         
-        table = DataTable(title=f'Voronoi statistics of the {self.max_indices} most frequent motifs', plot_mode=DataTable.PlotMode.BarChart)
+        table = DataTable(title=f'Voronoi statistics of the {self.max_indices} most frequent motifs', identifier='voronoi-stats', plot_mode=DataTable.PlotMode.BarChart)
         
         if self.x_axis_labels:
             table.x = table.create_property(f'Voronoi index {self.voro_format_label(self.n_start, self.n_end)}', data=np.arange(0, self.max_indices, 1, dtype=int))
